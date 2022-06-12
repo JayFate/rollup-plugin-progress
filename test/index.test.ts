@@ -1,7 +1,7 @@
 import progress from 'src/index'
 import { setInterval } from 'timers/promises'
 
-test('是否正常工作', async () => {
+test('控制台log测试', async () => {
   const progressBar = progress()
   const arg = undefined as any
   const interval = 100

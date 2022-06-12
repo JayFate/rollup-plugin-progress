@@ -34,7 +34,7 @@ specifiers:
   lint-staged: ^13.0.0
   prettier: ^2.6.2
   rollup: ^2.75.6
-  rollup-jest: ^2.0.0
+  rollup-jest: ^3.0.0
   rollup-plugin-cleandir: ^2.0.0
   rollup-plugin-typescript2: ^0.32.1
   rollup-plugin-visualizer: ^5.6.0
@@ -77,7 +77,7 @@ devDependencies:
   jest-extended: 2.0.0_jest@28.1.1
   lint-staged: 13.0.1
   prettier: 2.6.2
-  rollup-jest: 2.0.0_rollup@2.75.6
+  rollup-jest: 3.0.0_rollup@2.75.6
   rollup-plugin-cleandir: 2.0.0_rollup@2.75.6
   rollup-plugin-typescript2: 0.32.1_fgms252lqu3rk7srzpqqayl4ya
   rollup-plugin-visualizer: 5.6.0_rollup@2.75.6
@@ -5372,11 +5372,11 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rollup-jest/2.0.0_rollup@2.75.6:
-    resolution: {integrity: sha512-5ASZathXfGQeIKksfKTARXTtWe0ESb374vgUt2NpUCTEYyb28ZKiKvAq1Ss+b1XVx6vdj4jg+je5o+ZYbIM4zA==}
+  /rollup-jest/3.0.0_rollup@2.75.6:
+    resolution: {integrity: sha512-6v3s4q5z7+PkL1hUYg6KWlL2kUVkjUHLAlMsaHANmuwOrM1GSlRifiJkazdqymVPFfeBfpooDEtz04Q7qwuGaw==}
     engines: {node: '>=12.0'}
     peerDependencies:
-      rollup: ^1.1.0 || ^2
+      rollup: ^2.3.0
     dependencies:
       concat-merge: 1.0.3
       rollup: 2.75.6
