@@ -6,7 +6,7 @@
     "lib": ["ESNext", "DOM"],
 
     /* Modules */
-    "rootDirs": ["src"],
+    "rootDirs": ["src", "test"],
     "moduleResolution": "node",
     "baseUrl": ".",
 
@@ -26,5 +26,6 @@
     /* Completeness */
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "files": ["node_modules/jest-extended/types/index.d.ts"],
+  "include": ["src", "test"]
 }
