@@ -1,11 +1,10 @@
+import { defineConfig } from 'rollup'
 import { cleandir } from 'rollup-plugin-cleandir'
 import typescript from 'rollup-plugin-typescript2'
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import bable from '@rollup/plugin-babel'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
-
-import { defineConfig } from 'rollup'
 
 const rollupConfig = defineConfig({
   input: 'src/index.ts',
@@ -22,9 +21,13 @@ const rollupConfig = defineConfig({
     }
   ],
   plugins: [
-    cleandir(),
+    cleandir('dist'),
     // 支持处理 typescript 文件
-    typescript(),
+    typescript({
+      tsconfigOverride: {
+        exclude: ['test/**/*.ts']
+      }
+    }),
     // 将 commonjs 转换为 ES 模块
     commonjs(),
     // 解析 node_modules 中的模块

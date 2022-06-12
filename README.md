@@ -1,4 +1,14 @@
-## rollup-plugin-progress
+## 说明
+
+Clone from [rollup-plugin-progress](https://github.com/jkuri/rollup-plugin-progress)
+
+### 改动部分
+
+- rollup ^1.6.0 => ^2.75.6
+- chalk ^2.4.2 => ^4.0.0
+- 使用 typescript 重写
+
+## xxteam-rollup-plugin-progress
 
 Show current module being transpiled by the rollup bundler.
 
@@ -6,24 +16,25 @@ Show current module being transpiled by the rollup bundler.
 
 ### Installation
 
-```sh
-npm i rollup-plugin-progress --save-dev
+```shell
+npm i -D xxteam-rollup-plugin-progress
 ```
 
 ### Usage
 
 Include the following in the rollup config
 
-```js
-import { rollup } from 'rollup'
-import progress from 'rollup-plugin-progress'
+```typescript
+import { defineConfig } from 'rollup'
+import progress from 'xxteam-rollup-plugin-progress'
 
-rollup({
-  entry: 'main.js',
+const rollupConfig = defineConfig({
   plugins: [
     progress({
       clearLine: false // default: true
     })
   ]
-}).then(bundle => bundle.write({ dest: 'bundle.js', format: 'iife' }))
+})
+
+export default rollupConfig
 ```
