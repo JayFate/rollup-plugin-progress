@@ -3,7 +3,7 @@ import { resolve, relative, sep } from 'path'
 import { tmpdir } from 'os'
 import { readFileSync, writeFileSync } from 'fs'
 import * as readline from 'readline'
-import chalk from 'chalk'
+import { red } from 'chalk'
 
 export interface Options {
   clearLine?: boolean
@@ -48,14 +48,14 @@ const progress: PluginImpl<Options> = (options?: Options) => {
           const percent = Math.round((100 * state.loaded) / state.total)
           output += `${Math.min(100, percent)}% `
         }
-        output += `(${chalk.red(state.loaded)}): ${file}`
+        output += `(${red(state.loaded)}): ${file}`
         if (output.length < process.stdout.columns) {
           process.stdout.write(output)
         } else {
           process.stdout.write(output.substring(0, process.stdout.columns - 1))
         }
       } else {
-        console.log(`(${chalk.red(state.loaded)}): ${file}`)
+        console.log(`(${red(state.loaded)}): ${file}`)
       }
     },
     generateBundle() {

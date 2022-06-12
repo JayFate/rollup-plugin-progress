@@ -5,6 +5,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import bable from '@rollup/plugin-babel'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 const rollupConfig = defineConfig({
   input: 'src/index.ts',
@@ -12,6 +13,7 @@ const rollupConfig = defineConfig({
     {
       file: 'dist/index.js',
       format: 'cjs',
+      exports: 'auto',
       sourcemap: true
     },
     {
@@ -21,7 +23,7 @@ const rollupConfig = defineConfig({
     }
   ],
   plugins: [
-    cleandir('dist'),
+    cleandir(['dist', 'output']),
     // 支持处理 typescript 文件
     typescript({
       tsconfigOverride: {
@@ -41,7 +43,8 @@ const rollupConfig = defineConfig({
       exclude: 'node_modules/**',
       // rollup-babel 默认不转换 ts 需要手动添加
       extensions: [...DEFAULT_EXTENSIONS, '.ts']
-    })
+    }),
+    visualizer({ filename: 'output/stats.html' })
   ]
 })
 
