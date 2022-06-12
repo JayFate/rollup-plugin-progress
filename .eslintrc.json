@@ -1,0 +1,30 @@
+{
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "extends": ["airbnb-base", "airbnb-typescript/base", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "project": "tsconfig.eslint.json",
+    "parser": "@typescript-eslint/parser"
+  },
+  "plugins": ["@typescript-eslint"],
+  // 代码检查规则
+  // off：禁用此规则
+  // warn：代码检查时输出错误信息，但是不会影响到 exit code
+  // error：发现错误时，不仅会输出错误信息，而且 exit code 将被设为 1（一般 exit code 不为 0 则表示执行出现错误）
+  "rules": {
+    // 允许只有一个导出的时候不使用 export default
+    "import/prefer-default-export": "off",
+    // 允许所有语言特征
+    "no-restricted-syntax": "off",
+    // 只允许在 for 循环的最后一个表达式中使用 ++ 和 --
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    // 允许对函数参数进行赋值
+    "no-param-reassign": "off",
+    // 允许在条件语句中使用 =
+    "no-cond-assign": "off",
+    // 允许使用 console
+    "no-console": "off"
+  }
+}
