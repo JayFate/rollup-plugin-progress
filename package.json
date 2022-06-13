@@ -27,8 +27,8 @@
     "build": "npx rollup --c",
     "test": "npx jest",
     "lint": "npx eslint --fix --ext .ts,.js ./",
-    "install-git-hook": "npx husky install && npx husky set .husky/pre-commit \"npx lint-staged\" && npx husky set .husky/commit-msg \"npx --no-install commitlint --edit $1\"",
-    "prepublish": "pnpm run build"
+    "prepublish": "pnpm run build",
+    "prepare": "npx husky install && npx husky set .husky/pre-commit \"npx lint-staged\" && npx husky set .husky/commit-msg \"npx --no-install commitlint --edit $1\""
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.18.3",
