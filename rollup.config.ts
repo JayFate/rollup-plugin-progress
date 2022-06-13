@@ -31,10 +31,7 @@ const rollupConfig = defineConfig({
     commonjs(),
 
     // https://github.com/rollup/plugins/tree/master/packages/node-resolve/#readme
-    nodeResolve({
-      preferBuiltins: true,
-      moduleDirectories: ['node_modules']
-    }),
+    nodeResolve(),
 
     // https://github.com/ezolenko/rollup-plugin-typescript2
     typescript({

@@ -1,16 +1,13 @@
 {
   "presets": [
-    // 默认会根据.browserslistrc自动转换相应语法
-    ["@babel/env"],
+    "@babel/preset-env",
     "@babel/preset-typescript"
   ],
   "plugins": [
     [
-      // 自动移除语法转换后内联的辅助函数，使用@babel/runtime-corejs3/helpers里的辅助函数来替代
       "@babel/plugin-transform-runtime",
       {
-        "corejs": 3,
-        "useESModules": true
+        "corejs": 3
       }
     ]
   ]
