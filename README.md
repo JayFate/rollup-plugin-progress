@@ -1,12 +1,12 @@
-## 说明
+## Introduction
 
-Clone from [rollup-plugin-progress](https://github.com/jkuri/rollup-plugin-progress)
+Base on [rollup-plugin-progress](https://github.com/jkuri/rollup-plugin-progress)
 
-### 改动部分
+### Change
 
 - rollup ^1.6.0 => ^2.75.6
 - chalk ^2.4.2 => ^4.0.0
-- 使用 typescript 重写
+- Rewrite by typescript
 
 ## xxteam-rollup-plugin-progress
 
