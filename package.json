@@ -23,7 +23,7 @@
   "jsnext:main": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "commit": "git-cz",
+    "commit": "npx git-cz",
     "build": "npx rollup --c",
     "test": "npx jest",
     "lint": "npx eslint --fix --ext .ts,.js ./",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.18.3",
-    "chalk": "^4.0.0",
+    "picocolors": "^1.0.0",
     "rollup": "^2.75.6"
   },
   "devDependencies": {

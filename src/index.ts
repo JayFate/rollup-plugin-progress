@@ -4,7 +4,7 @@ import path from 'path'
 import os from 'os'
 import * as fs from 'fs'
 import * as readline from 'readline'
-import { red } from 'chalk'
+import { red } from 'picocolors'
 
 export interface Options {
   clearLine?: boolean

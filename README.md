@@ -5,7 +5,7 @@ Base on [rollup-plugin-progress](https://github.com/jkuri/rollup-plugin-progress
 ### Change
 
 - rollup ^1.6.0 => ^2.75.6
-- chalk ^2.4.2 => ^4.0.0
+- chalk ^2.4.2 => picocolors ^1.0.0
 - Rewrite by typescript
 
 ## xxteam-rollup-plugin-progress
