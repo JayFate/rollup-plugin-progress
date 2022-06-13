@@ -7,6 +7,7 @@ import bable from '@rollup/plugin-babel'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
 import { visualizer } from 'rollup-plugin-visualizer'
 
+// https://www.rollupjs.com/guide/big-list-of-options
 const rollupConfig = defineConfig({
   input: 'src/index.ts',
   output: [
@@ -23,27 +24,33 @@ const rollupConfig = defineConfig({
     }
   ],
   plugins: [
+    // https://github.com/mstssk/rollup-plugin-cleandir
     cleandir(['dist', 'output']),
-    // 支持处理 typescript 文件
+
+    // https://github.com/rollup/plugins/tree/master/packages/commonjs/#readme
+    commonjs(),
+
+    // https://github.com/rollup/plugins/tree/master/packages/node-resolve/#readme
+    nodeResolve({
+      preferBuiltins: true,
+      moduleDirectories: ['node_modules']
+    }),
+
+    // https://github.com/ezolenko/rollup-plugin-typescript2
     typescript({
       tsconfigOverride: {
         exclude: ['test/**/*.ts']
       }
     }),
-    // 将 commonjs 转换为 ES 模块
-    commonjs(),
-    // 解析 node_modules 中的模块
-    nodeResolve({
-      preferBuiltins: true,
-      moduleDirectories: ['node_modules']
-    }),
+
+    // https://github.com/rollup/plugins/tree/master/packages/babel#readme
     bable({
       babelHelpers: 'runtime',
-      // 只转换源代码，忽略node依赖
       exclude: 'node_modules/**',
-      // rollup-babel 默认不转换 ts 需要手动添加
       extensions: [...DEFAULT_EXTENSIONS, '.ts']
     }),
+
+    // https://github.com/btd/rollup-plugin-visualizer
     visualizer({ filename: 'output/stats.html' })
   ]
 })

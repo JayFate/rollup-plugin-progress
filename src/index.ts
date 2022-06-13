@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 import { PluginImpl } from 'rollup'
-import { resolve, relative, sep } from 'path'
-import { tmpdir } from 'os'
-import { readFileSync, writeFileSync } from 'fs'
+import path from 'path'
+import os from 'os'
+import * as fs from 'fs'
 import * as readline from 'readline'
 import { red } from 'chalk'
 
@@ -10,20 +11,18 @@ export interface Options {
 }
 
 function normalizePath(id: string) {
-  return relative(process.cwd(), id).split(sep).join('/')
+  return path.relative(process.cwd(), id).split(path.sep).join('/')
 }
 
 const progress: PluginImpl<Options> = (options?: Options) => {
-  if (options === undefined || options.clearLine === undefined) {
-    options = { clearLine: true }
-  }
+  const opts = { clearLine: true, ...options }
 
   let total = 0
-  const totalFilePath = resolve(tmpdir(), './xxteam-rollup-plugin-progress')
+  const totalFilePath = path.resolve(os.tmpdir(), './xxteam-rollup-plugin-progress')
   try {
-    total = parseInt(readFileSync(totalFilePath).toString(), 10)
+    total = parseInt(fs.readFileSync(totalFilePath).toString(), 10)
   } catch (e) {
-    writeFileSync(totalFilePath, '0')
+    fs.writeFileSync(totalFilePath, '0')
   }
   const state = {
     total,
@@ -41,7 +40,7 @@ const progress: PluginImpl<Options> = (options?: Options) => {
         return
       }
 
-      if (options!.clearLine && process.stdout.isTTY) {
+      if (opts.clearLine && process.stdout.isTTY) {
         readline.cursorTo(process.stdout, 0)
         let output = ''
         if (state.total > 0) {
@@ -59,8 +58,8 @@ const progress: PluginImpl<Options> = (options?: Options) => {
       }
     },
     generateBundle() {
-      writeFileSync(totalFilePath, String(state.loaded))
-      if (options!.clearLine && process.stdout.isTTY) {
+      fs.writeFileSync(totalFilePath, String(state.loaded))
+      if (opts.clearLine && process.stdout.isTTY) {
         readline.cursorTo(process.stdout, 0)
       }
     }
