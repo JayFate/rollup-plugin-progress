@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import { PluginImpl } from 'rollup'
 import path from 'path'
 import os from 'os'
 import * as fs from 'fs'
 import * as readline from 'readline'
+import { PluginImpl } from 'rollup'
+import { sync as mkdirpSync } from 'mkdirp'
 import { red } from 'picocolors'
 
 export interface Options {
@@ -18,9 +19,14 @@ const progress: PluginImpl<Options> = (options?: Options) => {
   const opts = { clearLine: true, ...options }
 
   let total = 0
-  const totalFilePath = path.resolve(os.tmpdir(), './xxteam-rollup-plugin-progress')
+  const dir = path.resolve(os.tmpdir(), 'xxteam-rollup-plugin-progress-dir')
+  if (!fs.existsSync(dir)) {
+    mkdirpSync(dir)
+  }
+  const totalFilePath = path.resolve(dir, path.basename(path.resolve()))
   try {
-    total = parseInt(fs.readFileSync(totalFilePath).toString(), 10)
+    const totalTemp = parseInt(fs.readFileSync(totalFilePath).toString(), 10)
+    total = Number.isNaN(totalTemp) ? 0 : totalTemp
   } catch (e) {
     fs.writeFileSync(totalFilePath, '0')
   }

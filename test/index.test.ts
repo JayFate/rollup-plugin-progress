@@ -2,7 +2,7 @@
 import progress, { Options } from 'src/index'
 import path from 'path'
 import os from 'os'
-import * as fs from 'fs'
+import fs from 'fs'
 import { setInterval } from 'timers/promises'
 
 const log = (options?: Options) => {
@@ -21,7 +21,11 @@ const log = (options?: Options) => {
 }
 
 beforeAll(() => {
-  const totalFilePath = path.resolve(os.tmpdir(), './xxteam-rollup-plugin-progress')
+  const totalFilePath = path.resolve(
+    os.tmpdir(),
+    './xxteam-rollup-plugin-progress-dir',
+    path.basename(path.resolve())
+  )
   if (fs.existsSync(totalFilePath)) {
     fs.unlinkSync(totalFilePath)
   }
