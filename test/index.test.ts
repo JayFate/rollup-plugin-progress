@@ -11,7 +11,13 @@ const log = (options?: Options) => {
     const arg = undefined as any
     for await (const startTime of setInterval(200, Date.now())) {
       const now = Date.now()
-      const id = path.resolve(path.resolve(), 'node_modules', (Math.random() * 16).toString())
+      const id = path.resolve(
+        path.resolve(),
+        'node_modules',
+        parseInt((Math.random() * 10).toString(), 10)
+          .toString()
+          .repeat(Math.random() * 100)
+      )
       progressBar.load?.bind(arg)(id)
       progressBar.transform?.bind(arg)('', id)
       if (now - startTime > 2000) break

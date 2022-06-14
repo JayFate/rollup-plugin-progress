@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import path from 'path'
 import os from 'os'
 import * as fs from 'fs'
@@ -47,6 +46,7 @@ const progress: PluginImpl<Options> = (options?: Options) => {
       }
 
       if (opts.clearLine && process.stdout.isTTY) {
+        readline.clearLine(process.stdout, 0)
         readline.cursorTo(process.stdout, 0)
         let output = ''
         if (state.total > 0) {
@@ -60,12 +60,14 @@ const progress: PluginImpl<Options> = (options?: Options) => {
           process.stdout.write(output.substring(0, process.stdout.columns - 1))
         }
       } else {
+        // eslint-disable-next-line no-console
         console.log(`(${red(state.loaded)}): ${file}`)
       }
     },
     generateBundle() {
       fs.writeFileSync(totalFilePath, String(state.loaded))
       if (opts.clearLine && process.stdout.isTTY) {
+        readline.clearLine(process.stdout, 0)
         readline.cursorTo(process.stdout, 0)
       }
     }
