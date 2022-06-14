@@ -1,11 +1,11 @@
 import { defineConfig } from 'rollup'
 import { cleandir } from 'rollup-plugin-cleandir'
-import typescript from 'rollup-plugin-typescript2'
+import nodeExternals from 'rollup-plugin-node-externals'
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
+import typescript from 'rollup-plugin-typescript2'
 import bable from '@rollup/plugin-babel'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
-import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://www.rollupjs.com/guide/big-list-of-options
 const rollupConfig = defineConfig({
@@ -25,7 +25,10 @@ const rollupConfig = defineConfig({
   ],
   plugins: [
     // https://github.com/mstssk/rollup-plugin-cleandir
-    cleandir(['dist', 'output']),
+    cleandir('dist'),
+
+    // https://github.com/Septh/rollup-plugin-node-externals
+    nodeExternals(),
 
     // https://github.com/rollup/plugins/tree/master/packages/commonjs/#readme
     commonjs(),
@@ -45,10 +48,7 @@ const rollupConfig = defineConfig({
       babelHelpers: 'runtime',
       exclude: 'node_modules/**',
       extensions: [...DEFAULT_EXTENSIONS, '.ts']
-    }),
-
-    // https://github.com/btd/rollup-plugin-visualizer
-    visualizer({ filename: 'output/stats.html' })
+    })
   ]
 })
 

@@ -1,3 +1,10 @@
+## v0.2.2 - 2022-06-14
+
+### Added
+
+- mkdirp => fs-extra.
+- Don't integrate node_modules code.
+
 ## v0.2.1 - 2022-06-14
 
 ### Fixed

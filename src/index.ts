@@ -1,28 +1,39 @@
 import path from 'path'
 import os from 'os'
-import * as fs from 'fs'
 import * as readline from 'readline'
+import fs from 'fs-extra'
 import { PluginImpl } from 'rollup'
-import { sync as mkdirpSync } from 'mkdirp'
 import { red } from 'picocolors'
 
 export interface Options {
+  /**
+   * If `true`, Each message will overwrite the last one.
+   * If `false`, Each message will be displayed on the next line of the last one.
+   * @default true
+   */
   clearLine?: boolean
 }
 
-function normalizePath(id: string) {
-  return path.relative(process.cwd(), id).split(path.sep).join('/')
+/**
+ * Convert full path to relative path of node execution path
+ */
+function normalizePath(fullPath: string) {
+  return path.relative(process.cwd(), fullPath).split(path.sep).join('/')
 }
 
+/**
+ * Display the rollup loading progress.
+ */
 const progress: PluginImpl<Options> = (options?: Options) => {
   const opts = { clearLine: true, ...options }
 
   let total = 0
-  const dir = path.resolve(os.tmpdir(), 'xxteam-rollup-plugin-progress-dir')
-  if (!fs.existsSync(dir)) {
-    mkdirpSync(dir)
-  }
-  const totalFilePath = path.resolve(dir, path.basename(path.resolve()))
+  const totalFilePath = path.resolve(
+    os.tmpdir(),
+    'xxteam-rollup-plugin-progress-dir',
+    path.basename(process.cwd())
+  )
+  fs.ensureFileSync(totalFilePath)
   try {
     const totalTemp = parseInt(fs.readFileSync(totalFilePath).toString(), 10)
     total = Number.isNaN(totalTemp) ? 0 : totalTemp
